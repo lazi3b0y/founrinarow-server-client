@@ -45,6 +45,7 @@ public class MainFrame extends JFrame {
 	public void addLabel(JLabel label){
 		label.setBounds(5, yCord, 490, 15);
 		this.add(label);
+		this.revalidate();
 		this.repaint();
 		yCord += 15;
 	}
