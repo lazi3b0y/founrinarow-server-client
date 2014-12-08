@@ -12,9 +12,11 @@ public class MainFrame extends JFrame {
 	/*EN KOMMENTAR TILL FOLKET*/
 	JButton terminate;
 	JLabel startUpMsg;
+	int yCord;
 	
 	public MainFrame(){		
 		super("Server-Window");
+		yCord = 0;
 		
 		terminate = new JButton("TERMINATE");
 		terminate.setBounds(200, 100, 100, 50);
@@ -28,7 +30,6 @@ public class MainFrame extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		ActionListener();
-			
 	}
 	
 	public void ActionListener (){
@@ -42,6 +43,8 @@ public class MainFrame extends JFrame {
 		});
 	}	
 	public void addLabel(LabelRow label){
+		label.setBounds(200, yCord, 200, 30);
+		yCord += 50;
 		this.add(label);
 	}
 }
