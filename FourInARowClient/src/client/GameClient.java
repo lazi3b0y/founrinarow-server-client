@@ -13,6 +13,6 @@ public class GameClient {
     	ClientCom clientCom = new ClientCom();
     	System.out.println("ClientCom instansiated.");
     	registry.bind(Constant.CLIENTCOM_ID, clientCom);
-    	System.out.println("ClientCom bound to the ID: " + Constant.CLIENTCOM_ID);
+    	System.out.println("ClientCom bound to the ID: " + Constant.CLIENTCOM_ID + ".");
     }
 }
