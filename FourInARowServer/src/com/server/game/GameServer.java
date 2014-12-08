@@ -25,8 +25,6 @@ public class GameServer {
 			System.exit(0);
 		}
     	System.out.println("Registry instansiated.");
-    	LabelRow label = new LabelRow("Registry instansiated");
-    	mainFrame.addObject(label);
     	ServerCom serverCom = null;
 		try {
 			serverCom = new ServerCom();
