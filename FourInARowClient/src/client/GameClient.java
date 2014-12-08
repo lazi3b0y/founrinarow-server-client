@@ -7,6 +7,7 @@ import com.interf.fourinarow.Constant;
 
 public class GameClient {
     public static void main(String[] args) throws Exception {
+    	//Comment? Yes please mr comment sir work
     	Registry registry = LocateRegistry.getRegistry("127.0.0.1", Constant.RMI_PORT);
     	System.out.println("Fetched registry from port " + Constant.RMI_PORT);
     	ClientCom clientCom = new ClientCom();
