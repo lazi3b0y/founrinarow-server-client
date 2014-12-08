@@ -1,6 +1,8 @@
 package com.server.game;
 
+import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -51,5 +53,53 @@ public class GameServer {
     	mainFrame.addLabel(new JLabel("ServerCom bound to the ID: " + Constant.SERVERCOM_ID + "."));
     	System.out.println("Server is running...");
     	mainFrame.addLabel(new JLabel("Server is running..."));
+    	waitForPlayers(mainFrame);
+    }
+    
+    public static void waitForPlayers(MainFrame mainFrame) {
+    	boolean ready = false;
+    	Registry registry = null;
+    	try {
+			registry = LocateRegistry.getRegistry("127.0.0.1", Constant.RMI_PORT);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	while(ready == false) {
+    		ready = true;
+    		try {
+				registry.lookup(Constant.CLIENTCOM1_ID);
+			} catch (AccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NotBoundException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				ready = false;
+			}
+    	}
+    	mainFrame.addLabel(new JLabel("A client connected to the server and is bound to " + Constant.CLIENTCOM1_ID));
+    	
+    	ready = false;
+    	while (ready == false) {
+    		ready = true;
+    		try {
+				registry.lookup(Constant.CLIENTCOM2_ID);
+			} catch (AccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (NotBoundException e) {
+				// TODO Auto-generated catch block
+				//e.printStackTrace();
+				ready = false;
+			}
+    	}
+    	mainFrame.addLabel(new JLabel("A client connected to the server and is bound to " + Constant.CLIENTCOM2_ID));
     }
 }
