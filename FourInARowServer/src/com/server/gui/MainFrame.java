@@ -40,6 +40,7 @@ public class MainFrame extends JFrame {
 		terminate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				System.out.println("Terminating server.");
 				System.exit(0);
 			}
 		});

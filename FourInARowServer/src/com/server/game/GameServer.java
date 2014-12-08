@@ -2,11 +2,13 @@ package com.server.game;
 
 import java.rmi.AlreadyBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.*;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 
 import javax.swing.JOptionPane;
 
-import com.interf.fourinarow.*;
+import com.interf.fourinarow.Constant;
+import com.server.gui.MainFrame;
 
 public class GameServer {
     public static void main(String[] args) {
@@ -43,5 +45,6 @@ public class GameServer {
 		}
     	System.out.println("ServerCom bound to the ID: " + Constant.SERVERCOM_ID + ".");
     	System.out.println("Server is running..");
+    	MainFrame mainFrame = new MainFrame();
     }
 }
