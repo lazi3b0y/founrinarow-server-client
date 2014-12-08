@@ -18,7 +18,7 @@ public class Player {
 		super();
 		registry = LocateRegistry.getRegistry("localhost", Constant.RMI_PORT);
 		try {
-			clientCom = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM_ID);
+			clientCom = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM1_ID);
 		} catch (NotBoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -8,10 +8,12 @@ import java.rmi.registry.Registry;
 import javax.swing.JOptionPane;
 
 import com.interf.fourinarow.Constant;
+import com.server.gui.LabelRow;
 import com.server.gui.MainFrame;
 
 public class GameServer {
     public static void main(String[] args) {
+    	MainFrame mainFrame = new MainFrame();
     	Registry registry = null;
 		try {
 			registry = LocateRegistry.createRegistry(Constant.RMI_PORT);
@@ -23,6 +25,8 @@ public class GameServer {
 			System.exit(0);
 		}
     	System.out.println("Registry instansiated.");
+    	LabelRow label = new LabelRow("Registry instansiated");
+    	mainFrame.addObject(label);
     	ServerCom serverCom = null;
 		try {
 			serverCom = new ServerCom();
@@ -45,6 +49,5 @@ public class GameServer {
 		}
     	System.out.println("ServerCom bound to the ID: " + Constant.SERVERCOM_ID + ".");
     	System.out.println("Server is running..");
-    	MainFrame mainFrame = new MainFrame();
     }
 }
