@@ -9,13 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import com.interf.fourinarow.Constant;
-import com.server.gui.LabelRow;
 import com.server.gui.MainFrame;
 
 public class GameServer {
     public static void main(String[] args) {
     	MainFrame mainFrame = new MainFrame();
-    	LabelRow servLabel1, servLabel2, servLabel3, servLabel4;
     	Registry registry = null;
 		try {
 			registry = LocateRegistry.createRegistry(Constant.RMI_PORT);
@@ -27,8 +25,7 @@ public class GameServer {
 			System.exit(0);
 		}
     	System.out.println("Registry instansiated.");
-    	servLabel1 = new LabelRow("Registry instansiated");
-    	mainFrame.addLabel(servLabel1);
+    	mainFrame.addLabel(new JLabel("Registry instansiated."));
     	ServerCom serverCom = null;
 		try {
 			serverCom = new ServerCom();
@@ -40,8 +37,7 @@ public class GameServer {
 			System.exit(0);
 		}
     	System.out.println("ServerCom instansiated.");
-    	servLabel2 = new LabelRow("ServerCom instansiated");
-    	mainFrame.addLabel(servLabel2);
+    	mainFrame.addLabel(new JLabel("ServerCom instansiated"));
     	try {
 			registry.bind(Constant.SERVERCOM_ID, serverCom);
 		} catch (RemoteException | AlreadyBoundException e) {
@@ -52,10 +48,8 @@ public class GameServer {
 			System.exit(0);
 		}
     	System.out.println("ServerCom bound to the ID: " + Constant.SERVERCOM_ID + ".");
-    	servLabel3 = new LabelRow("ServerCom bound to the ID: " + Constant.SERVERCOM_ID + ".");
-    	mainFrame.addLabel(servLabel3);
-    	System.out.println("Server is running..");
-    	servLabel4 = new LabelRow("Server is running..");
-    	mainFrame.addLabel(servLabel4);
+    	mainFrame.addLabel(new JLabel("ServerCom bound to the ID: " + Constant.SERVERCOM_ID + "."));
+    	System.out.println("Server is running...");
+    	mainFrame.addLabel(new JLabel("Server is running..."));
     }
 }

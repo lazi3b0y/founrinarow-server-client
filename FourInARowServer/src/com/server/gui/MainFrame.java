@@ -16,14 +16,14 @@ public class MainFrame extends JFrame {
 	
 	public MainFrame(){		
 		super("Server-Window");
-		yCord = 0;
+		yCord = 5;
 		
 		terminate = new JButton("TERMINATE");
-		terminate.setBounds(200, 100, 100, 50);
+		terminate.setBounds(200, 600, 100, 50);
 		this.add(terminate);
 		
 		this.setLayout(null);
-		this.setSize(500,200);
+		this.setSize(500,700);
 		this.setVisible(true);
 		this.setLocationRelativeTo(null);
 		this.setResizable(false);
@@ -42,9 +42,10 @@ public class MainFrame extends JFrame {
 			}
 		});
 	}	
-	public void addLabel(LabelRow label){
-		label.setBounds(200, yCord, 200, 30);
-		yCord += 50;
+	public void addLabel(JLabel label){
+		label.setBounds(5, yCord, 590, 15);
 		this.add(label);
+		this.repaint();
+		yCord += 15;
 	}
 }
