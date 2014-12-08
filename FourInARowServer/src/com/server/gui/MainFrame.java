@@ -20,10 +20,6 @@ public class MainFrame extends JFrame {
 		terminate.setBounds(200, 100, 100, 50);
 		this.add(terminate);
 		
-		startUpMsg = new JLabel("LALALALALALALALALAA");
-		startUpMsg.setBounds(200, 100, 100, 30);
-		this.add(startUpMsg);
-		
 		this.setLayout(null);
 		this.setSize(500,200);
 		this.setVisible(true);
@@ -45,4 +41,7 @@ public class MainFrame extends JFrame {
 			}
 		});
 	}	
+	public void addLabel(LabelRow label){
+		this.add(label);
+	}
 }
