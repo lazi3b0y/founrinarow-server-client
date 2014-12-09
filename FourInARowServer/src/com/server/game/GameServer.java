@@ -17,6 +17,8 @@ public class GameServer {
     public static void main(String[] args) {
     	MainFrame mainFrame = new MainFrame();
     	Registry registry = null;
+    	ServerCom serverCom = null;
+    	
 		try {
 			registry = LocateRegistry.createRegistry(Constant.RMI_PORT);
 		} catch (RemoteException e) {
@@ -26,9 +28,10 @@ public class GameServer {
 			System.out.println("Exception encountered. Terminating server.");
 			System.exit(0);
 		}
-    	System.out.println("Registry instansiated.");
-    	mainFrame.addLabel(new JLabel("Registry instansiated."));
-    	ServerCom serverCom = null;
+		
+    	System.out.println("Registry created.");
+    	mainFrame.addLabel(new JLabel("Registry created."));
+    	
 		try {
 			serverCom = new ServerCom();
 		} catch (RemoteException e) {
@@ -38,8 +41,10 @@ public class GameServer {
 			System.out.println("Exception encountered. Terminating server.");
 			System.exit(0);
 		}
-    	System.out.println("ServerCom instansiated.");
-    	mainFrame.addLabel(new JLabel("ServerCom instansiated"));
+		
+    	System.out.println("ServerCom created.");
+    	mainFrame.addLabel(new JLabel("ServerCom created"));
+    	
     	try {
 			registry.bind(Constant.SERVERCOM_ID, serverCom);
 		} catch (RemoteException | AlreadyBoundException e) {
@@ -49,14 +54,21 @@ public class GameServer {
 			System.out.println("Exception encountered. Terminating server.");
 			System.exit(0);
 		}
-    	System.out.println("ServerCom bound to the ID: " + Constant.SERVERCOM_ID + ".");
-    	mainFrame.addLabel(new JLabel("ServerCom bound to the ID: " + Constant.SERVERCOM_ID + "."));
+    	
+    	System.out.println("ServerCom bound to ID: " + Constant.SERVERCOM_ID + ".");
+    	mainFrame.addLabel(new JLabel("ServerCom bound to ID: " + Constant.SERVERCOM_ID + "."));
     	System.out.println("Server is running...");
     	mainFrame.addLabel(new JLabel("Server is running..."));
-    	waitForPlayers(mainFrame);
+    	
+    	try {
+			waitForPlayers(mainFrame);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
     
-    public static void waitForPlayers(MainFrame mainFrame) {
+    public static void waitForPlayers(MainFrame mainFrame) throws AccessException, RemoteException {
     	boolean ready = false;
     	Registry registry = null;
     	try {
@@ -69,12 +81,6 @@ public class GameServer {
     		ready = true;
     		try {
 				registry.lookup(Constant.CLIENTCOM1_ID);
-			} catch (AccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (NotBoundException e) {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();
@@ -88,12 +94,6 @@ public class GameServer {
     		ready = true;
     		try {
 				registry.lookup(Constant.CLIENTCOM2_ID);
-			} catch (AccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			} catch (NotBoundException e) {
 				// TODO Auto-generated catch block
 				//e.printStackTrace();

@@ -28,7 +28,7 @@ public class Player {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int GetNewMove() {
+	public int GetNewMove() throws RemoteException {
 		// TODO Auto-generated method stub
 		return clientCom.getGameBoardPlayerInput();
 	}

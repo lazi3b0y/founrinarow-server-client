@@ -19,21 +19,17 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
 	private static final long serialVersionUID = 7572721052589916852L;
 	
     Registry registry;
-	SetupGameDialog setupGameDialog;
+    RemoteServerCom serverCom;
 	MoveDialog moveDialog;
     GameBoard gameBoard;
     GameFrame gameFrame;
     
     public ClientCom() throws Exception, RemoteException {
     	registry = LocateRegistry.getRegistry("localhost", Constant.RMI_PORT);
-    	setupGameDialog = new SetupGameDialog();
+		serverCom = (RemoteServerCom) registry.lookup(Constant.SERVERCOM_ID);
     	moveDialog = null;
     	gameBoard = null;
     	gameFrame = null;
-    }
-    
-    public void setSetupGameDialogToVisible() {
-    	setupGameDialog.setVisible(true);
     }
     
     public void setGameBoardToVisible() {

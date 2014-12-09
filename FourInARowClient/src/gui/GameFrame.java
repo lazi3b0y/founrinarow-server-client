@@ -68,7 +68,12 @@ public class GameFrame extends JFrame implements ActionListener {
 	    JButton button = (JButton) e.getSource();
 	    buttonName = button.getText();
 	    if (buttonName.equals("New Game")) {
-	        serverCom.resetGameGrid();
+	        try {
+				serverCom.resetGameGrid();
+			} catch (RemoteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 	        gameBoard.resetGameBoard();
 	    } else {
 	        System.exit(0);

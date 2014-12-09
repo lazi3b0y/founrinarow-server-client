@@ -1,5 +1,6 @@
 package com.server.game;
 
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -25,7 +26,7 @@ public class GameManager {
         gameGrid = new GameGrid();
     }
 
-    public void StartGame() {
+    public void StartGame() throws RemoteException {
         int move = 0;
         while (true) {
             //Requesting move from player.

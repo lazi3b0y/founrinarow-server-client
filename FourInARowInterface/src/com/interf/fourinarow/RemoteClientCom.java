@@ -1,12 +1,14 @@
 package com.interf.fourinarow;
 
-public interface RemoteClientCom {
-    public void setSetupGameDialogToVisible();
-    public void setGameBoardToVisible();
-    public void updateGameBoard(int[][] gameGrid);
-    public int getGameBoardPlayerInput();
-    public void setGameFrameToVisible();
-    public void showWinnerDialog(String playerName);
-    public void showDrawnDialog();
-    public void showInvalidDialog(String invalid);
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
+public interface RemoteClientCom extends Remote {
+    public void setGameBoardToVisible() throws RemoteException;
+    public void updateGameBoard(int[][] gameGrid) throws RemoteException;
+    public int getGameBoardPlayerInput() throws RemoteException;
+    public void setGameFrameToVisible() throws RemoteException;
+    public void showWinnerDialog(String playerName) throws RemoteException;
+    public void showDrawnDialog() throws RemoteException;
+    public void showInvalidDialog(String invalid) throws RemoteException;
 }
