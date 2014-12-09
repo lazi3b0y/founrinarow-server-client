@@ -34,7 +34,7 @@ public class SetupGameDialog extends JDialog {
         setLayout(grid);
         getRootPane().setDefaultButton(jbtOk);
         setLocationRelativeTo(null);
-        add(new JLabel("Player 1:"));
+        add(new JLabel("Player " + idTag + ":"));
         add(playerTextField);
         add(jbtOk, BorderLayout.PAGE_END);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
