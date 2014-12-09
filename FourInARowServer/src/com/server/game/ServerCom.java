@@ -60,5 +60,7 @@ public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 		clientCom2 = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM2_ID);
 		clientCom1.setPlayer(1);
 		clientCom2.setPlayer(2);
+		clientCom1.setSetupGameDialog();
+		clientCom2.setSetupGameDialog();
 	}
 }

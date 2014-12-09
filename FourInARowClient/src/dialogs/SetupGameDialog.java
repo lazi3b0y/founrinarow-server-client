@@ -39,7 +39,7 @@ public class SetupGameDialog extends JDialog {
         add(jbtOk, BorderLayout.PAGE_END);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(300, 200);
-        setVisible(true);
+        setVisible(false);
         setResizable(false);
     }
 
