@@ -27,9 +27,9 @@ public class GameClient {
 			registry.bind(Constant.CLIENTCOM1_ID, clientCom);
 		} catch (AlreadyBoundException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e.toString() + "\n\n" + Constant.CLIENTCOM1_ID + " is already bound to a different client. Trying to bind you to ClientCom2 instead.", "AlreadyBoundException",JOptionPane.INFORMATION_MESSAGE);
-			System.out.println("AlreadyBoundException encountered. Trying to bind to " + Constant.CLIENTCOM2_ID + ".");
+			//e.printStackTrace();
+			//JOptionPane.showMessageDialog(null, e.toString() + "\n\n" + Constant.CLIENTCOM1_ID + " is already bound to a different client. Trying to bind you to ClientCom2 instead.", "AlreadyBoundException",JOptionPane.INFORMATION_MESSAGE);
+			//System.out.println("AlreadyBoundException encountered. Trying to bind to " + Constant.CLIENTCOM2_ID + ".");
 			try {
 				registry.bind(Constant.CLIENTCOM2_ID, clientCom);
 			} catch (AlreadyBoundException e1) {
