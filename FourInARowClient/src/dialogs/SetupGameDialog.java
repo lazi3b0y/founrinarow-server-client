@@ -48,7 +48,7 @@ public class SetupGameDialog extends JDialog {
             if (!playerTextField.getText().equals("")) {
 				System.out.println("Setting player name and marker.");
                 try {
-					serverCom.setPlayerName(playerTextField.getText(), 0);
+					serverCom.setPlayerName(playerTextField.getText(), idTag);
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -56,5 +56,8 @@ public class SetupGameDialog extends JDialog {
                 dispose();
             }
         }
+    }
+    public void setIdTag(int idTag) {
+    	this.idTag = idTag;
     }
 }

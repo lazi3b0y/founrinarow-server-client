@@ -22,12 +22,8 @@ public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 	
 	public ServerCom() throws RemoteException, NotBoundException {
 		registry = LocateRegistry.getRegistry(Constant.RMI_IP, Constant.RMI_PORT);
-		clientCom1 = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM1_ID);
-		clientCom2 = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM2_ID);
 		gameGrid = new GameGrid();
 		player1 = null;
-		clientCom1.setPlayer(1);
-		clientCom2.setPlayer(2);
 	}
 	
 	public int[][] getGameGrid() {
