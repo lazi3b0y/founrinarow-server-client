@@ -14,7 +14,7 @@ import com.interf.fourinarow.Constant;
 import com.server.gui.MainFrame;
 
 public class GameServer {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NotBoundException {
     	MainFrame mainFrame = new MainFrame();
     	Registry registry = null;
     	ServerCom serverCom = null;
@@ -87,6 +87,7 @@ public class GameServer {
 				ready = false;
 			}
     	}
+    	
     	mainFrame.addLabel(new JLabel("A client connected to the server and is bound to " + Constant.CLIENTCOM1_ID));
     	
     	ready = false;

@@ -11,4 +11,5 @@ public interface RemoteClientCom extends Remote {
     public void showWinnerDialog(String playerName) throws RemoteException;
     public void showDrawnDialog() throws RemoteException;
     public void showInvalidDialog(String invalid) throws RemoteException;
+    public void setPlayer(int idTag) throws RemoteException;
 }
