@@ -73,5 +73,6 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     
     public void setPlayer(int idTag) {
     	setupGameDialog.setIdTag(idTag);
+    	setupGameDialog.repaintNameWindow(idTag);
     }
 }

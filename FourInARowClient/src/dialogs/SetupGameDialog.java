@@ -25,22 +25,24 @@ public class SetupGameDialog extends JDialog {
     private int idTag;
 
     public SetupGameDialog(RemoteServerCom serverCom) throws RemoteException {
-        playerTextField = new JTextField(20);
-        jbtOk = new JButton("OK");
         this.serverCom = serverCom;
-        
-        setModal(true);
-        jbtOk.addActionListener(new SaveNamesListener());
-        setLayout(grid);
-        getRootPane().setDefaultButton(jbtOk);
-        setLocationRelativeTo(null);
+       
         add(new JLabel("Player " + idTag + ":"));
+       
+        playerTextField = new JTextField(20);
         add(playerTextField);
+        
+        getRootPane().setDefaultButton(jbtOk);
+        jbtOk = new JButton("OK");
+        jbtOk.addActionListener(new SaveNamesListener());
         add(jbtOk, BorderLayout.PAGE_END);
-        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        
+        setLayout(grid);
         setSize(300, 200);
         setVisible(false);
         setResizable(false);
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
     }
 
     private class SaveNamesListener implements ActionListener {
@@ -59,5 +61,19 @@ public class SetupGameDialog extends JDialog {
     }
     public void setIdTag(int idTag) {
     	this.idTag = idTag;
+    }
+    
+    public void repaintNameWindow(int idTag){
+    	removeAll();
+        add(new JLabel("Player " + idTag + ":"));
+        
+        playerTextField = new JTextField(20);
+        add(playerTextField);
+        
+        getRootPane().setDefaultButton(jbtOk);
+        jbtOk = new JButton("OK");
+        jbtOk.addActionListener(new SaveNamesListener());
+        add(jbtOk, BorderLayout.PAGE_END);
+        repaint();
     }
 }
