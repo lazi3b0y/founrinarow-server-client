@@ -4,7 +4,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface RemoteClientCom extends Remote {
-	public void setSetupGameDialog() throws RemoteException;
+	public void setSetupGameDialogToVisible() throws RemoteException;
     public void setGameBoardToVisible() throws RemoteException;
     public void updateGameBoard(int[][] gameGrid) throws RemoteException;
     public int getGameBoardPlayerInput() throws RemoteException;

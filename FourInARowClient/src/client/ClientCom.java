@@ -35,7 +35,7 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     	gameFrame = null;
     }
     
-    public void setSetupGameDialog() {
+    public void setSetupGameDialogToVisible() {
     	setupGameDialog.setVisible(true);
     }
     
