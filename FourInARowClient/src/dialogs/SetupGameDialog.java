@@ -27,6 +27,8 @@ public class SetupGameDialog extends JDialog {
     public SetupGameDialog(RemoteServerCom serverCom, int tag) throws RemoteException {
         playerTextField = new JTextField(20);
         jbtOk = new JButton("OK");
+        this.idTag = tag;
+        this.serverCom = serverCom;
         
         setModal(true);
         jbtOk.addActionListener(new SaveNamesListener());
