@@ -11,12 +11,15 @@ import com.interf.fourinarow.Constant;
 
 public class GameClient {
     public static void main(String[] args) throws RemoteException, Exception {
+    	
+    	// Getting the registry, and instansiating clientCom.
     	System.out.println("Fetched registry from port " + Constant.RMI_PORT);
-    	Registry registry = LocateRegistry.getRegistry("127.0.0.1", Constant.RMI_PORT);;
+    	Registry registry = LocateRegistry.getRegistry(Constant.RMI_IP, Constant.RMI_PORT);
     	ClientCom clientCom = new ClientCom();
+    	System.out.println("clientCom created. Bindning now...");
     	
-    	System.out.println("ClientCom created. Bindning now...");
-    	
+    	// Trying to bind the class-variable clientCom to a ID in the registry.
+    	// If it fails the client terminates.
     	try {
 			registry.bind(Constant.CLIENTCOM1_ID, clientCom);
 		} catch (AlreadyBoundException e) {

@@ -22,12 +22,10 @@ public class SetupGameDialog extends JDialog {
     private JButton jbtOk;
     private GridLayout grid = new GridLayout(0, 1);
     private RemoteServerCom serverCom;
-    private String id;
 
-    public SetupGameDialog(RemoteServerCom serverCom, String id) throws RemoteException {
+    public SetupGameDialog() throws RemoteException {
         playerTextField = new JTextField(20);
         jbtOk = new JButton("OK");
-        this.id = id;
         
         setModal(true);
         jbtOk.addActionListener(new SaveNamesListener());
@@ -49,16 +47,6 @@ public class SetupGameDialog extends JDialog {
 				System.out.println("Setting player name and marker.");
                 try {
 					serverCom.setPlayerName(playerTextField.getText());
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-                try {
-                	if (id == Constant.CLIENTCOM1_ID) {
-                		serverCom.setPlayerMarker(1);
-                	} else {
-                		serverCom.setPlayerMarker(2);
-                	}
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
