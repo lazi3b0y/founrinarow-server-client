@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 
 import com.interf.fourinarow.Constant;
 
+import dialogs.SetupGameDialog;
+
 public class GameClient {
     public static void main(String[] args) throws RemoteException, Exception {
     	

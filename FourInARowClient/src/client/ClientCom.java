@@ -59,4 +59,7 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     public void showInvalidDialog(String invalid) {
     	moveDialog.PaintInvalidMoveDialog(invalid);
     }
+    public RemoteServerCom getServerCom(){
+    	return serverCom;
+    }
 }

@@ -22,8 +22,9 @@ public class SetupGameDialog extends JDialog {
     private JButton jbtOk;
     private GridLayout grid = new GridLayout(0, 1);
     private RemoteServerCom serverCom;
+    private int idTag;
 
-    public SetupGameDialog() throws RemoteException {
+    public SetupGameDialog(RemoteServerCom serverCom, int tag) throws RemoteException {
         playerTextField = new JTextField(20);
         jbtOk = new JButton("OK");
         
@@ -37,7 +38,7 @@ public class SetupGameDialog extends JDialog {
         add(jbtOk, BorderLayout.PAGE_END);
         setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         setSize(300, 200);
-        setVisible(false);
+        setVisible(true);
         setResizable(false);
     }
 
