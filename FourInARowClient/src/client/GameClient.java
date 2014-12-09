@@ -18,7 +18,6 @@ public class GameClient {
     	System.out.println("Fetched registry from port " + Constant.RMI_PORT);
     	Registry registry = LocateRegistry.getRegistry(Constant.RMI_IP, Constant.RMI_PORT);
     	ClientCom clientCom = new ClientCom();
-    	SetupGameDialog SGD = new SetupGameDialog(clientCom.getServerCom(), 1);
     	System.out.println("clientCom created. Bindning now...");
     	
     	// Trying to bind the class-variable clientCom to a ID in the registry.

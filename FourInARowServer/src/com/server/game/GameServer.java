@@ -61,14 +61,14 @@ public class GameServer {
     	mainFrame.addLabel(new JLabel("Server is running..."));
     	
     	try {
-			waitForPlayers(mainFrame);
+			waitForPlayers(mainFrame, serverCom);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
     
-    public static void waitForPlayers(MainFrame mainFrame) throws AccessException, RemoteException {
+    public static void waitForPlayers(MainFrame mainFrame, ServerCom serverCom) throws AccessException, RemoteException, NotBoundException {
     	boolean ready = false;
     	Registry registry = null;
     	try {
@@ -102,5 +102,6 @@ public class GameServer {
 			}
     	}
     	mainFrame.addLabel(new JLabel("A client connected to the server and is bound to " + Constant.CLIENTCOM2_ID));
+    	serverCom.setPlayers();
     }
 }

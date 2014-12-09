@@ -1,5 +1,6 @@
 package com.server.game;
 
+import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -14,7 +15,7 @@ public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 	private static final long serialVersionUID = 2039209136402692346L;
 	
 	private GameGrid gameGrid;
-	private Player player;
+	private Player player1, player2;
 	private Registry registry;
 	private RemoteClientCom clientCom1;
 	private RemoteClientCom clientCom2;
@@ -24,7 +25,7 @@ public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 		clientCom1 = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM1_ID);
 		clientCom2 = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM2_ID);
 		gameGrid = new GameGrid();
-		player = null;
+		player1 = null;
 		clientCom1.setPlayer(1);
 		clientCom2.setPlayer(2);
 	}
@@ -37,19 +38,27 @@ public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 		gameGrid.resetGrid();
 	}
 	
-	public void setPlayerName(String name) {
-		if (player == null) {
+	public void setPlayerName(String name, int idTag) throws RemoteException {
+		if (player1 == null && idTag == 1) {
 			try {
-				player = new Player();
+				player1 = new Player();
+				player1.setPlayerName(name);
+				player1.setPlayerMarker(idTag);
 			} catch (RemoteException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else {
+				player2 = new Player();
+				player2.setPlayerName(name);
+				player2.setPlayerMarker(idTag);
 		}
-		player.setPlayerName(name);
 	}
 	
-	public void setPlayerMarker(int marker) {
-		player.setPlayerMarker(marker);
+	public void setPlayers() throws AccessException, RemoteException, NotBoundException{
+		clientCom1 = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM1_ID);
+		clientCom2 = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM2_ID);
+		clientCom1.setPlayer(1);
+		clientCom2.setPlayer(2);
 	}
 }

@@ -24,10 +24,9 @@ public class SetupGameDialog extends JDialog {
     private RemoteServerCom serverCom;
     private int idTag;
 
-    public SetupGameDialog(RemoteServerCom serverCom, int tag) throws RemoteException {
+    public SetupGameDialog(RemoteServerCom serverCom) throws RemoteException {
         playerTextField = new JTextField(20);
         jbtOk = new JButton("OK");
-        this.idTag = tag;
         this.serverCom = serverCom;
         
         setModal(true);
@@ -49,7 +48,7 @@ public class SetupGameDialog extends JDialog {
             if (!playerTextField.getText().equals("")) {
 				System.out.println("Setting player name and marker.");
                 try {
-					serverCom.setPlayerName(playerTextField.getText());
+					serverCom.setPlayerName(playerTextField.getText(), 0);
 				} catch (RemoteException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
