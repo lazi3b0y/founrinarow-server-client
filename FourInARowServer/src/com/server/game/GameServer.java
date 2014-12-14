@@ -61,22 +61,16 @@ public class GameServer {
     	mainFrame.addLabel(new JLabel("Server is running..."));
     	
     	try {
-			waitForPlayers(mainFrame, serverCom);
+			waitForPlayers(mainFrame, serverCom, registry);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     }
     
-    public static void waitForPlayers(MainFrame mainFrame, ServerCom serverCom) throws AccessException, RemoteException, NotBoundException {
+    public static void waitForPlayers(MainFrame mainFrame, ServerCom serverCom, Registry registry) throws AccessException, RemoteException, NotBoundException {
     	boolean ready = false;
-    	Registry registry = null;
-    	try {
-			registry = LocateRegistry.getRegistry("127.0.0.1", Constant.RMI_PORT);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
     	while(ready == false) {
     		ready = true;
     		try {
