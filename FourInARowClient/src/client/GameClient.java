@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 
 import com.interf.fourinarow.Constant;
 
+import dialogs.WaitingForMoveDialog;
+
 public class GameClient {
     public static void main(String[] args) throws RemoteException, Exception {
     	// Getting the registry, and instansiating clientCom.
