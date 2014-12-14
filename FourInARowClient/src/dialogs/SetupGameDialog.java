@@ -52,9 +52,10 @@ public class SetupGameDialog extends JDialog {
         playerTextField = new JTextField(20);
         add(playerTextField);
         
-        getRootPane().setDefaultButton(jbtOk);
+        
         jbtOk = new JButton("OK");
         jbtOk.addActionListener(new SaveNamesListener());
+        getRootPane().setDefaultButton(jbtOk);
         add(jbtOk, BorderLayout.PAGE_END);
         
         setLayout(grid);
