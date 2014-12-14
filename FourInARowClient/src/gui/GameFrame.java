@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.rmi.AccessException;
-import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -31,18 +29,7 @@ public class GameFrame extends JFrame implements ActionListener {
     
     public GameFrame(String title) throws Exception {
     	super(title);
-    	try {
-			serverCom = (RemoteServerCom) registry.lookup(Constant.SERVERCOM_ID);
-		} catch (AccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NotBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		serverCom = (RemoteServerCom) registry.lookup(Constant.SERVERCOM_ID);
         setSize(500, 500);
         setVisible(false);
         setLocationRelativeTo(null);

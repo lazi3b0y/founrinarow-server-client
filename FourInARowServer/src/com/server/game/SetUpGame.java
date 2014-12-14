@@ -61,27 +61,30 @@ public class SetUpGame {
     	
     	ready = false;
     	while(ready == false) {
-    		if (serverCom.getPlayer1() == null && serverCom.getPlayer2() == null) {
-    			System.out.println("player 1 = null; player 2 = null");
-    			Thread.sleep(500);
-    		} else if (serverCom.getPlayer1() != null && serverCom.getPlayer2() == null) {
-    			System.out.println("player 2 = null");
-    			Thread.sleep(500);
-    		} else if (serverCom.getPlayer1() == null && serverCom.getPlayer2() != null) {
-    			System.out.println("player 1 = null");
-    			Thread.sleep(500);
-    		} else {
-    			player1 = serverCom.getPlayer1();
-    			player2 = serverCom.getPlayer2();
-    			mainFrame.addLabel(new JLabel("Initializing Player 1's game gui.."));
-    			clientCom1.setGameFrameToVisible();
-    			clientCom1.setGameBoardToVisible();
-    			mainFrame.addLabel(new JLabel("Initializing Player 2's game gui.."));
-    			clientCom2.setGameFrameToVisible();
-    			clientCom2.setGameBoardToVisible();
-    			ready = true;
-    		}
-    	}
+			if (serverCom.getPlayer1() != null && serverCom.getPlayer2() == null) {
+				mainFrame.addLabel(new JLabel("Displaying wait dialog for player 1."));
+				clientCom1.displayWaitDialog();
+				Thread.sleep(500);
+			} else if (serverCom.getPlayer1() == null && serverCom.getPlayer2() != null) {
+				mainFrame.addLabel(new JLabel("Displaying wait dialog for player 2."));
+				clientCom2.displayWaitDialog();
+				Thread.sleep(500);
+			} else if (serverCom.getPlayer1() != null && serverCom.getPlayer2() != null) {
+				mainFrame.addLabel(new JLabel("Disposing any wait dialogs."));
+				clientCom2.displayWaitDialog();
+				//clientCom1.disposeWaitingDialog();
+				//clientCom2.disposeWaitingDialog();
+				player1 = serverCom.getPlayer1();
+				player2 = serverCom.getPlayer2();
+				mainFrame.addLabel(new JLabel("Initializing Player 1's game gui.."));
+				clientCom1.setGameFrameToVisible();
+				clientCom1.setGameBoardToVisible();
+				mainFrame.addLabel(new JLabel("Initializing Player 2's game gui.."));
+				clientCom2.setGameFrameToVisible();
+				clientCom2.setGameBoardToVisible();
+				ready = true;
+			}
+		}
     	gameManager = new GameManager(player1, player2, clientCom1, clientCom2, mainFrame);
     	gameManager.StartGame();
 	}

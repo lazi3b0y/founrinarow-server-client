@@ -15,6 +15,7 @@ import com.interf.fourinarow.RemoteServerCom;
 
 import dialogs.MoveDialog;
 import dialogs.SetupGameDialog;
+import dialogs.WaitingDialog;
 
 public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
 	private static final long serialVersionUID = 7572721052589916852L;
@@ -25,6 +26,7 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     GameBoard gameBoard;
     GameFrame gameFrame;
     SetupGameDialog setupGameDialog;
+    WaitingDialog waitingDialog;
     int idTag;
     
     public ClientCom() throws RemoteException, NotBoundException {
@@ -34,6 +36,7 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     	moveDialog = null;
     	gameBoard = null;
     	gameFrame = null;
+    	waitingDialog = null;
     }
     
     public void setSetupGameDialogToVisible() throws RemoteException {
@@ -91,5 +94,13 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     	}
     	setupGameDialog.setIdTag(idTag);
     	setupGameDialog.constructSetupGameDialog(idTag);
+    }
+    
+    public void displayWaitDialog() {
+    	waitingDialog = new WaitingDialog();
+    }
+    
+    public void disposeWaitingDialog() {
+    	waitingDialog.disposeDialog();
     }
 }
