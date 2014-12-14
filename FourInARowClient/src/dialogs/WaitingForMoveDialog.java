@@ -11,8 +11,8 @@ public class WaitingForMoveDialog extends JDialog {
 		WFMLabel = new JLabel("Your opponent is making a move.. ");
 		WFMLabel.setBounds(90, 15, 200, 20);
 
-		setLayout(null);
 		add(WFMLabel);
+		setLayout(null);
 		setTitle("Waiting for opponent to make a move.. ");
 		setSize(355, 80);
 		setLocationRelativeTo(null);

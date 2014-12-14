@@ -12,8 +12,8 @@ public class WaitingDialog extends JDialog {
 		JLabel WDLabel = new JLabel("Waiting for a second player! ");
 		WDLabel.setBounds(90, 15, 200, 20);
 		
-		setLayout(null);
 		add(WDLabel);
+		setLayout(null);
 		setTitle("Waiting for opponent to join the server");
 		setSize(355, 80);
 		setLocationRelativeTo(null);
