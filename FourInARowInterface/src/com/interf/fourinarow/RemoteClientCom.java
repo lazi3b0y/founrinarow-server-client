@@ -14,5 +14,5 @@ public interface RemoteClientCom extends Remote {
     public void showInvalidDialog(String invalid) throws RemoteException;
     public void setPlayer(int idTag) throws RemoteException;
     public void displayWaitDialog() throws RemoteException;
-    public void disposeWaitingDialog() throws RemoteException;
+    public void disposeWaitDialog() throws RemoteException;
 }

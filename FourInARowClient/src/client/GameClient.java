@@ -9,14 +9,12 @@ import javax.swing.JOptionPane;
 
 import com.interf.fourinarow.Constant;
 
-import dialogs.WaitingDialog;
-
 public class GameClient {
     public static void main(String[] args) throws RemoteException, Exception {
     	// Getting the registry, and instansiating clientCom.
     	System.out.println("Fetched registry from " + Constant.RMI_LOCALHOST + ":" + Constant.RMI_PORT);
     	Registry registry = LocateRegistry.getRegistry(Constant.RMI_LOCALHOST, Constant.RMI_PORT);
-    	ClientCom clientCom = new ClientCom();
+    	ClientCom clientCom = new ClientCom(registry);
     	System.out.println("clientCom created. Bindning now...");
     	
     	// Trying to bind the class-variable clientCom to a ID in the registry.

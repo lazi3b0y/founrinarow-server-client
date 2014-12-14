@@ -27,10 +27,15 @@ public class GameManager {
         int move = 0;
         while (true) {
             //Requesting move from player.
-            if (nextPlayer == 1)
+            if (nextPlayer == 1) {
+            	clientCom2.displayWaitDialog();
                 move = player1.GetNewMove();
-            else
+                clientCom2.disposeWaitDialog();
+            } else {
+            	clientCom1.displayWaitDialog();
                 move = player2.GetNewMove();
+                clientCom1.disposeWaitDialog();
+            }
             //Trying to make move at selected column.
             try {
                 gameGrid.makeMove(move, nextPlayer);

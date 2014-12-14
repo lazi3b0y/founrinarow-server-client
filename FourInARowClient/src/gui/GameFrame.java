@@ -16,9 +16,9 @@ import com.interf.fourinarow.Constant;
 import com.interf.fourinarow.RemoteServerCom;
 
 public class GameFrame extends JFrame implements ActionListener {
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1342900243149570497L;
 	
-    private JPanel contentPane = new JPanel(new BorderLayout());
+	private JPanel contentPane = new JPanel(new BorderLayout());
     private JPanel buttons = new JPanel(new BorderLayout());
     private JButton newGameButton = new JButton("New Game");
     private JButton quitButton = new JButton("Quit");

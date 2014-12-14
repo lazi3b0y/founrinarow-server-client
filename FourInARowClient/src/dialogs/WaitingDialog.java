@@ -17,7 +17,7 @@ public class WaitingDialog extends JDialog {
 		setTitle("Waiting for opponent to join the server");
 		setSize(355, 80);
 		setLocationRelativeTo(null);
-		setVisible(true);
+		setVisible(false);
 		setResizable(false);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 	}

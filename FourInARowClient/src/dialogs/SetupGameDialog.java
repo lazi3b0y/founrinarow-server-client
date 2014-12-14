@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
-import com.interf.fourinarow.Constant;
 import com.interf.fourinarow.RemoteServerCom;
 
 public class SetupGameDialog extends JDialog {

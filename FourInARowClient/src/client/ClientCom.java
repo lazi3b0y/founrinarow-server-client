@@ -5,7 +5,6 @@ import gui.GameFrame;
 
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -29,14 +28,14 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     WaitingDialog waitingDialog;
     int idTag;
     
-    public ClientCom() throws RemoteException, NotBoundException {
-    	registry = LocateRegistry.getRegistry("localhost", Constant.RMI_PORT);
-		serverCom = (RemoteServerCom) registry.lookup(Constant.SERVERCOM_ID);
+    public ClientCom(Registry registry) throws RemoteException, NotBoundException {
+    	this.registry = registry;
+		this.serverCom = (RemoteServerCom) registry.lookup(Constant.SERVERCOM_ID);
 		setupGameDialog = null;
     	moveDialog = null;
     	gameBoard = null;
     	gameFrame = null;
-    	waitingDialog = null;
+    	waitingDialog = new WaitingDialog();
     }
     
     public void setSetupGameDialogToVisible() throws RemoteException {
@@ -97,10 +96,14 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     }
     
     public void displayWaitDialog() {
-    	waitingDialog = new WaitingDialog();
+    	if (waitingDialog == null) {
+    		waitingDialog = new WaitingDialog();
+    	}
+    	waitingDialog.setVisible(true);
     }
     
-    public void disposeWaitingDialog() {
+    public void disposeWaitDialog() {
     	waitingDialog.disposeDialog();
+    	waitingDialog = null;
     }
 }

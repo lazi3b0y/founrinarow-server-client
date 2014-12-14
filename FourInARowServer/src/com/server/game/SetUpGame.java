@@ -58,28 +58,26 @@ public class SetUpGame {
     	}
     	mainFrame.addLabel(new JLabel("A client connected to the server and is bound to " + Constant.CLIENTCOM2_ID + "."));
     	serverCom.setPlayers(clientCom1, clientCom2);
-    	
+    	mainFrame.addLabel(new JLabel("Players 1 and 2 are now established."));
     	ready = false;
     	while(ready == false) {
+    		System.out.println();
 			if (serverCom.getPlayer1() != null && serverCom.getPlayer2() == null) {
-				mainFrame.addLabel(new JLabel("Displaying wait dialog for player 1."));
 				clientCom1.displayWaitDialog();
 				Thread.sleep(500);
 			} else if (serverCom.getPlayer1() == null && serverCom.getPlayer2() != null) {
-				mainFrame.addLabel(new JLabel("Displaying wait dialog for player 2."));
 				clientCom2.displayWaitDialog();
 				Thread.sleep(500);
 			} else if (serverCom.getPlayer1() != null && serverCom.getPlayer2() != null) {
 				mainFrame.addLabel(new JLabel("Disposing any wait dialogs."));
-				clientCom2.displayWaitDialog();
-				//clientCom1.disposeWaitingDialog();
-				//clientCom2.disposeWaitingDialog();
+				clientCom1.disposeWaitDialog();
+				clientCom2.disposeWaitDialog();
 				player1 = serverCom.getPlayer1();
 				player2 = serverCom.getPlayer2();
-				mainFrame.addLabel(new JLabel("Initializing Player 1's game gui.."));
+				mainFrame.addLabel(new JLabel("Initializing Player 1's game GUI.."));
 				clientCom1.setGameFrameToVisible();
 				clientCom1.setGameBoardToVisible();
-				mainFrame.addLabel(new JLabel("Initializing Player 2's game gui.."));
+				mainFrame.addLabel(new JLabel("Initializing Player 2's game GUI.."));
 				clientCom2.setGameFrameToVisible();
 				clientCom2.setGameBoardToVisible();
 				ready = true;
