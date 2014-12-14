@@ -4,7 +4,6 @@ import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
 
 import javax.swing.JLabel;
 
@@ -16,22 +15,21 @@ public class SetUpGame {
 	Registry registry;
 	ServerCom serverCom;
 	MainFrame mainFrame;
-	Player player1;
-	Player player2;
+	Player player1, player2;
 	RemoteClientCom clientCom1;
 	RemoteClientCom clientCom2;
 	
-	public SetUpGame(Registry registry, ServerCom serverCom, MainFrame mainFrame, Player player1, Player player2) throws RemoteException {
+	public SetUpGame(Registry registry, ServerCom serverCom, MainFrame mainFrame) {
 		this.registry = registry;
 		this.serverCom = serverCom;
 		this.mainFrame = mainFrame;
-		this.player1 = player1;
-		this.player2 = player2;
+		this.player1 = null;
+		this.player2 = null;
 		clientCom1 = null;
 		clientCom2 = null;
 	}
 	
-	public void waitForPlayers() throws AccessException, RemoteException, NotBoundException {
+	public void waitForPlayers() throws Exception {
     	boolean ready = false;
 
     	while(ready == false) {
@@ -61,14 +59,22 @@ public class SetUpGame {
     	
     	ready = false;
     	while(ready == false) {
-    		if (player1 == null && player2 == null) {
-    			
-    		} else if (player1 != null && player2 == null) {
-    			
-    		} else if (player1 == null && player2 != null) {
-    			
+    		if (serverCom.getPlayer1() == null && serverCom.getPlayer2() == null) {
+    			System.out.println("player 1 = null; player 2 = null");
+    		} else if (serverCom.getPlayer1() != null && serverCom.getPlayer2() == null) {
+    			System.out.println("player 2 = null");
+    		} else if (serverCom.getPlayer1() == null && serverCom.getPlayer2() != null) {
+    			System.out.println("player 1 = null");
     		} else {
-    			
+    			player1 = serverCom.getPlayer1();
+    			player2 = serverCom.getPlayer2();
+    			mainFrame.addLabel(new JLabel("Initializing Player 1's game gui.."));
+    			clientCom1.setGameFrameToVisible();
+    			clientCom1.setGameBoardToVisible();
+    			mainFrame.addLabel(new JLabel("Initializing Player 2's game gui.."));
+    			clientCom2.setGameFrameToVisible();
+    			clientCom2.setGameBoardToVisible();
+    			ready = true;
     		}
     	}
 	}

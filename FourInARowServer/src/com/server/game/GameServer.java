@@ -14,7 +14,7 @@ import com.interf.fourinarow.Constant;
 import com.server.gui.MainFrame;
 
 public class GameServer {
-    public static void main(String[] args) throws AccessException, RemoteException, NotBoundException {
+    public static void main(String[] args) throws Exception {
     	MainFrame mainFrame = new MainFrame();
     	Registry registry = null;
     	ServerCom serverCom = null;
@@ -58,7 +58,7 @@ public class GameServer {
     	System.out.println("Server is running...");
     	mainFrame.addLabel(new JLabel("Server is running..."));
     	
-    	setUpGame = new SetUpGame(registry, serverCom, mainFrame, serverCom.getPlayer1(), serverCom.getPlayer2());
+    	setUpGame = new SetUpGame(registry, serverCom, mainFrame);
 		setUpGame.waitForPlayers();
     }
 }

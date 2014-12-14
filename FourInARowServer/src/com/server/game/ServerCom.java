@@ -43,7 +43,7 @@ public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 	}
 	
 	public void setPlayerName(String name, int idTag) throws RemoteException {
-		if (player1 == null && idTag == 1) {
+		if (idTag == 1) {
 				player1 = new Player();
 				player1.setPlayerName(name);
 				player1.setPlayerMarker(idTag);

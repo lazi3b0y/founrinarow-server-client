@@ -26,7 +26,7 @@ public class GameManager {
         gameGrid = new GameGrid();
     }
 
-    public void StartGame() throws RemoteException {
+    public void StartGame() throws RemoteException, InterruptedException {
         int move = 0;
         while (true) {
             //Requesting move from player.

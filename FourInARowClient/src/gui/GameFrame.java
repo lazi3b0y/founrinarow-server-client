@@ -43,7 +43,7 @@ public class GameFrame extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
         setSize(500, 500);
-        setVisible(true);
+        setVisible(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
@@ -68,7 +68,7 @@ public class GameFrame extends JFrame implements ActionListener {
 	    JButton button = (JButton) e.getSource();
 	    buttonName = button.getText();
 	    if (buttonName.equals("New Game")) {
-	        try {
+			try {
 				serverCom.resetGameGrid();
 			} catch (RemoteException e1) {
 				// TODO Auto-generated catch block
@@ -78,5 +78,9 @@ public class GameFrame extends JFrame implements ActionListener {
 	    } else {
 	        System.exit(0);
 	    }
+    }
+    
+    public void setVisiblity(boolean visible) {
+    	setVisible(visible);
     }
 }

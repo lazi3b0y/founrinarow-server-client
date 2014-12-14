@@ -61,14 +61,11 @@ public class GameBoard extends JPanel implements ActionListener {
                 panelGrid[i][j].setBackground(new Color(0, 0, 0));
     }
 
-    public int getPlayerInput() {
+    public int getPlayerInput() throws InterruptedException {
         lastColumn = -1;
 
         while (lastColumn == -1) {
-            try {
                 Thread.sleep(100);
-            } catch (InterruptedException e) {
-            }
         }
         return lastColumn;
     }
@@ -85,5 +82,9 @@ public class GameBoard extends JPanel implements ActionListener {
             else
                 b.setBackground(RED);
         }
+    }
+    
+    public void setVisiblity(boolean visible) {
+    	setVisible(visible);
     }
 }

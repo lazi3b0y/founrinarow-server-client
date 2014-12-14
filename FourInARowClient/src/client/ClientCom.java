@@ -39,7 +39,17 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     	setupGameDialog.setVisible(true);
     }
     
+    public void setGameFrameToVisible() throws Exception {
+    	if (gameFrame == null) {
+    		gameFrame = new GameFrame();
+    	}
+    	gameFrame.setVisible(true);
+    }
+    
     public void setGameBoardToVisible() {
+    	if (gameBoard == null) {
+    		gameBoard = gameFrame.getGameBoard();
+    	}
     	gameBoard.setVisible(true);
     }
     
@@ -47,12 +57,8 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     	gameBoard.updateBoard(gameGrid);
     }
     
-    public int getGameBoardPlayerInput() {
+    public int getGameBoardPlayerInput() throws InterruptedException {
     	return gameBoard.getPlayerInput();
-    }
-    
-    public void setGameFrameToVisible() {
-    	gameFrame.setVisible(true);
     }
     
     public void showWinnerDialog(String playerName) {
