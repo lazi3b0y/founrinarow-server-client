@@ -29,7 +29,8 @@ public class GameFrame extends JFrame implements ActionListener {
     private Registry registry = LocateRegistry.getRegistry("localhost", Constant.RMI_PORT);
     private RemoteServerCom serverCom;
     
-    public GameFrame() throws Exception {
+    public GameFrame(String title) throws Exception {
+    	super(title);
     	try {
 			serverCom = (RemoteServerCom) registry.lookup(Constant.SERVERCOM_ID);
 		} catch (AccessException e) {

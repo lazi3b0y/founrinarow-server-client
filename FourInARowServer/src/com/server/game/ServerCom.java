@@ -3,13 +3,11 @@ package com.server.game;
 import java.rmi.AccessException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 import javax.swing.JLabel;
 
-import com.interf.fourinarow.Constant;
 import com.interf.fourinarow.RemoteClientCom;
 import com.interf.fourinarow.RemoteServerCom;
 import com.server.gui.MainFrame;
@@ -44,12 +42,12 @@ public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 	
 	public void setPlayerName(String name, int idTag) throws RemoteException {
 		if (idTag == 1) {
-				player1 = new Player();
+				player1 = new Player(registry, clientCom1);
 				player1.setPlayerName(name);
 				player1.setPlayerMarker(idTag);
 				mainFrame.addLabel(new JLabel("Set Player 1's name to " + name));
 		} else {
-				player2 = new Player();
+				player2 = new Player(registry, clientCom2);
 				player2.setPlayerName(name);
 				player2.setPlayerMarker(idTag);
 				mainFrame.addLabel(new JLabel("Set Player 2's name to " + name));

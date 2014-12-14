@@ -3,6 +3,7 @@ package client;
 import gui.GameBoard;
 import gui.GameFrame;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -26,22 +27,29 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     SetupGameDialog setupGameDialog;
     int idTag;
     
-    public ClientCom() throws Exception, RemoteException {
+    public ClientCom() throws RemoteException, NotBoundException {
     	registry = LocateRegistry.getRegistry("localhost", Constant.RMI_PORT);
 		serverCom = (RemoteServerCom) registry.lookup(Constant.SERVERCOM_ID);
-		setupGameDialog = new SetupGameDialog(serverCom);
+		setupGameDialog = null;
     	moveDialog = null;
     	gameBoard = null;
     	gameFrame = null;
     }
     
-    public void setSetupGameDialogToVisible() {
+    public void setSetupGameDialogToVisible() throws RemoteException {
+    	if (setupGameDialog == null) {
+    		setupGameDialog = new SetupGameDialog(serverCom);
+    	}
     	setupGameDialog.setVisible(true);
     }
     
     public void setGameFrameToVisible() throws Exception {
     	if (gameFrame == null) {
-    		gameFrame = new GameFrame();
+    		if (idTag == 1) {
+    			gameFrame = new GameFrame("Player 1");
+    		} else {
+    			gameFrame = new GameFrame("Player 2");
+    		}
     	}
     	gameFrame.setVisible(true);
     }
@@ -77,7 +85,10 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     	return serverCom;
     }
     
-    public void setPlayer(int idTag) {
+    public void setPlayer(int idTag) throws RemoteException {
+    	if (setupGameDialog == null) {
+    		setupGameDialog = new SetupGameDialog(serverCom);
+    	}
     	setupGameDialog.setIdTag(idTag);
     	setupGameDialog.constructSetupGameDialog(idTag);
     }

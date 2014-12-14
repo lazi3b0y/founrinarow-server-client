@@ -1,6 +1,5 @@
 package com.server.game;
 
-import java.rmi.AccessException;
 import java.rmi.AlreadyBoundException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -8,17 +7,16 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 
 import com.interf.fourinarow.Constant;
 import com.server.gui.MainFrame;
 
 public class GameServer {
     public static void main(String[] args) throws Exception {
-    	MainFrame mainFrame = new MainFrame();
     	Registry registry = null;
     	ServerCom serverCom = null;
     	SetUpGame setUpGame = null;
+    	MainFrame mainFrame = new MainFrame();
     	
 		try {
 			registry = LocateRegistry.createRegistry(Constant.RMI_PORT);
