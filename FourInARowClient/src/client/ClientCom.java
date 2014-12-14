@@ -64,10 +64,14 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     }
     
     public void updateGameBoard(int[][] gameGrid) {
+    	if (gameBoard == null) {
+    		System.out.println("gameboard = null");
+    	}
     	gameBoard.updateBoard(gameGrid);
     }
     
     public int getGameBoardPlayerInput() throws InterruptedException {
+    	System.out.println("Getting player input.");
     	return gameBoard.getPlayerInput();
     }
     
@@ -91,6 +95,7 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     	if (setupGameDialog == null) {
     		setupGameDialog = new SetupGameDialog(serverCom);
     	}
+    	this.idTag = idTag;
     	setupGameDialog.setIdTag(idTag);
     	setupGameDialog.constructSetupGameDialog(idTag);
     }

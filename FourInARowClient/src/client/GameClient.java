@@ -15,10 +15,11 @@ public class GameClient {
     	System.out.println("Fetched registry from " + Constant.RMI_LOCALHOST + ":" + Constant.RMI_PORT);
     	Registry registry = LocateRegistry.getRegistry(Constant.RMI_LOCALHOST, Constant.RMI_PORT);
     	ClientCom clientCom = new ClientCom(registry);
-    	System.out.println("clientCom created. Bindning now...");
+    	System.out.println("clientCom instansiated.");
     	
-    	// Trying to bind the class-variable clientCom to a ID in the registry.
+    	// Trying to bind the object clientCom to a ID in the registry.
     	// If it fails the client terminates.
+    	System.out.println("Bindning now...");
     	try {
 			registry.bind(Constant.CLIENTCOM1_ID, clientCom);
 		} catch (AlreadyBoundException e) {

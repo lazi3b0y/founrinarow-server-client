@@ -28,7 +28,6 @@ public class GameBoard extends JPanel implements ActionListener {
     public void initColumnButtons() {
         for (int i = 0; i < 7; i++) {
             columnButtons[i] = new JButton("C" + (i + 1));
-            columnButtons[i].setBackground(RED);
             columnButtons[i].addActionListener(this);
             columnSelect.add(columnButtons[i]);
         }
@@ -63,7 +62,7 @@ public class GameBoard extends JPanel implements ActionListener {
 
     public int getPlayerInput() throws InterruptedException {
         lastColumn = -1;
-
+        System.out.println("Getting player input.");
         while (lastColumn == -1) {
                 Thread.sleep(100);
         }
@@ -75,13 +74,6 @@ public class GameBoard extends JPanel implements ActionListener {
         JButton button = (JButton) e.getSource();
         buttonName = button.getText();
         lastColumn = Character.getNumericValue(buttonName.charAt(buttonName.length() - 1)) - 1;
-
-        for (JButton b : columnButtons) {
-            if (b.getBackground() == RED)
-                b.setBackground(BLUE);
-            else
-                b.setBackground(RED);
-        }
     }
     
     public void setVisiblity(boolean visible) {

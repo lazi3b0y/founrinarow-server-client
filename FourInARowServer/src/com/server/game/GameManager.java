@@ -1,6 +1,9 @@
 package com.server.game;
 
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+
+import javax.swing.JLabel;
 
 import com.interf.fourinarow.RemoteClientCom;
 import com.server.exceptions.DrawnMoveException;
@@ -12,6 +15,7 @@ public class GameManager {
 	RemoteClientCom clientCom1, clientCom2;
     private Player player1;
     private Player player2;
+    private MainFrame mainFrame;
     private GameGrid gameGrid;
     private int nextPlayer = 1;
 
@@ -21,29 +25,33 @@ public class GameManager {
         this.clientCom2 = clientCom2;
     	this.player1 = player1;
         this.player2 = player2;
+        this.mainFrame = mainFrame;
     }
 
-    public void StartGame() throws RemoteException, InterruptedException {
+    public void StartGame() throws RemoteException, InterruptedException, NotBoundException {
         int move = 0;
         while (true) {
             //Requesting move from player.
             if (nextPlayer == 1) {
             	clientCom2.displayWaitDialog();
                 move = player1.GetNewMove();
+                mainFrame.addLabel(new JLabel("Player 1 choose column " + move));
                 clientCom2.disposeWaitDialog();
             } else {
             	clientCom1.displayWaitDialog();
                 move = player2.GetNewMove();
+                mainFrame.addLabel(new JLabel("Player 2 choose column " + move));
                 clientCom1.disposeWaitDialog();
             }
             //Trying to make move at selected column.
             try {
                 gameGrid.makeMove(move, nextPlayer);
                 //Switching what player to request move from.
-                nextPlayer = (nextPlayer == 1) ? 2 : 1;
             } catch (InvalidMoveException e) {
-            	clientCom1.showInvalidDialog(e.getMessage());
-            	clientCom2.showInvalidDialog(e.getMessage());
+            	if (nextPlayer == 1)
+            		clientCom1.showInvalidDialog(e.getMessage());
+            	else 
+            		clientCom2.showInvalidDialog(e.getMessage());
             } catch (WinningMoveException e) {
                 clientCom1.updateGameBoard(gameGrid.getGrid());
                 clientCom2.updateGameBoard(gameGrid.getGrid());
@@ -66,6 +74,7 @@ public class GameManager {
                 clientCom1.updateGameBoard(gameGrid.getGrid());
                 clientCom2.updateGameBoard(gameGrid.getGrid());
             }
+            nextPlayer = (nextPlayer == 1) ? 2 : 1;
             //Updating board.
             clientCom1.updateGameBoard(gameGrid.getGrid());
             clientCom2.updateGameBoard(gameGrid.getGrid());
