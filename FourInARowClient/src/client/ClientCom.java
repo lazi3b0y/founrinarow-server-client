@@ -25,7 +25,7 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     GameFrame gameFrame;
     SetupGameDialog setupGameDialog;
     int idTag;
-    //
+    
     public ClientCom() throws Exception, RemoteException {
     	registry = LocateRegistry.getRegistry("localhost", Constant.RMI_PORT);
 		serverCom = (RemoteServerCom) registry.lookup(Constant.SERVERCOM_ID);
