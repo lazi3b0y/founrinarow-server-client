@@ -7,9 +7,12 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
+import javax.swing.JLabel;
+
 import com.interf.fourinarow.Constant;
 import com.interf.fourinarow.RemoteClientCom;
 import com.interf.fourinarow.RemoteServerCom;
+import com.server.gui.MainFrame;
 
 public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 	private static final long serialVersionUID = 2039209136402692346L;
@@ -19,11 +22,16 @@ public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 	private Registry registry;
 	private RemoteClientCom clientCom1;
 	private RemoteClientCom clientCom2;
+	private MainFrame mainFrame;
 	
-	public ServerCom() throws RemoteException, NotBoundException {
-		registry = LocateRegistry.getRegistry(Constant.RMI_IP, Constant.RMI_PORT);
+	public ServerCom(MainFrame mainFrame, Registry registry) throws RemoteException, NotBoundException {
 		gameGrid = new GameGrid();
 		player1 = null;
+		player2 = null;
+		clientCom1 = null;
+		clientCom2 = null;
+		this.registry = registry;
+		this.mainFrame = mainFrame;
 	}
 	
 	public int[][] getGameGrid() {
@@ -36,27 +44,30 @@ public class ServerCom extends UnicastRemoteObject implements RemoteServerCom {
 	
 	public void setPlayerName(String name, int idTag) throws RemoteException {
 		if (player1 == null && idTag == 1) {
-			try {
 				player1 = new Player();
 				player1.setPlayerName(name);
 				player1.setPlayerMarker(idTag);
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+				mainFrame.addLabel(new JLabel("Set Player 1's name to " + name));
 		} else {
 				player2 = new Player();
 				player2.setPlayerName(name);
 				player2.setPlayerMarker(idTag);
+				mainFrame.addLabel(new JLabel("Set Player 2's name to " + name));
 		}
 	}
 	
-	public void setPlayers() throws AccessException, RemoteException, NotBoundException{
-		clientCom1 = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM1_ID);
-		clientCom2 = (RemoteClientCom) registry.lookup(Constant.CLIENTCOM2_ID);
+	public void setPlayers(RemoteClientCom clientCom1, RemoteClientCom clientCom2) throws AccessException, RemoteException, NotBoundException{
 		clientCom1.setPlayer(1);
 		clientCom2.setPlayer(2);
 		clientCom1.setSetupGameDialogToVisible();
 		clientCom2.setSetupGameDialogToVisible();
+	}
+	
+	public Player getPlayer1() {
+		return player1;
+	}
+	
+	public Player getPlayer2() {
+		return player2;
 	}
 }

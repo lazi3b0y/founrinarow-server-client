@@ -14,18 +14,18 @@ import com.interf.fourinarow.Constant;
 import com.server.gui.MainFrame;
 
 public class GameServer {
-    public static void main(String[] args) throws NotBoundException {
+    public static void main(String[] args) throws AccessException, RemoteException, NotBoundException {
     	MainFrame mainFrame = new MainFrame();
     	Registry registry = null;
     	ServerCom serverCom = null;
+    	SetUpGame setUpGame = null;
     	
 		try {
 			registry = LocateRegistry.createRegistry(Constant.RMI_PORT);
 		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Exception Error.",JOptionPane.INFORMATION_MESSAGE);
-			System.out.println("Exception encountered. Terminating server.");
+			//e.printStackTrace();
+			mainFrame.addLabel(new JLabel(e.getMessage() + "\nException encountered. Terminating server."));
+			System.out.println(e.getMessage() + "\nException encountered. Terminating server.");
 			System.exit(0);
 		}
 		
@@ -33,25 +33,23 @@ public class GameServer {
     	mainFrame.addLabel(new JLabel("Registry created."));
     	
 		try {
-			serverCom = new ServerCom();
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Exception Error.",JOptionPane.INFORMATION_MESSAGE);
-			System.out.println("Exception encountered. Terminating server.");
+			serverCom = new ServerCom(mainFrame, registry);
+		} catch (RemoteException | NotBoundException e) {
+			//e.printStackTrace();
+			mainFrame.addLabel(new JLabel(e.getMessage() + "\nException encountered. Terminating server."));
+			System.out.println(e.getMessage() + "\nException encountered. Terminating server.");
 			System.exit(0);
 		}
 		
     	System.out.println("ServerCom created.");
-    	mainFrame.addLabel(new JLabel("ServerCom created"));
+    	mainFrame.addLabel(new JLabel("ServerCom created."));
     	
     	try {
 			registry.bind(Constant.SERVERCOM_ID, serverCom);
 		} catch (RemoteException | AlreadyBoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Exception Error.",JOptionPane.INFORMATION_MESSAGE);
-			System.out.println("Exception encountered. Terminating server.");
+			//e.printStackTrace();
+			mainFrame.addLabel(new JLabel(e.getMessage() + "\nException encountered. Terminating server."));
+			System.out.println(e.getMessage() + "\nException encountered. Terminating server.");
 			System.exit(0);
 		}
     	
@@ -60,42 +58,7 @@ public class GameServer {
     	System.out.println("Server is running...");
     	mainFrame.addLabel(new JLabel("Server is running..."));
     	
-    	try {
-			waitForPlayers(mainFrame, serverCom, registry);
-		} catch (RemoteException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
-    
-    public static void waitForPlayers(MainFrame mainFrame, ServerCom serverCom, Registry registry) throws AccessException, RemoteException, NotBoundException {
-    	boolean ready = false;
-
-    	while(ready == false) {
-    		ready = true;
-    		try {
-				registry.lookup(Constant.CLIENTCOM1_ID);
-			} catch (NotBoundException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-				ready = false;
-			}
-    	}
-    	
-    	mainFrame.addLabel(new JLabel("A client connected to the server and is bound to " + Constant.CLIENTCOM1_ID));
-    	
-    	ready = false;
-    	while (ready == false) {
-    		ready = true;
-    		try {
-				registry.lookup(Constant.CLIENTCOM2_ID);
-			} catch (NotBoundException e) {
-				// TODO Auto-generated catch block
-				//e.printStackTrace();
-				ready = false;
-			}
-    	}
-    	mainFrame.addLabel(new JLabel("A client connected to the server and is bound to " + Constant.CLIENTCOM2_ID));
-    	serverCom.setPlayers();
+    	setUpGame = new SetUpGame(registry, serverCom, mainFrame, serverCom.getPlayer1(), serverCom.getPlayer2());
+		setUpGame.waitForPlayers();
     }
 }
