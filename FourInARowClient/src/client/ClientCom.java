@@ -76,14 +76,23 @@ public class ClientCom extends UnicastRemoteObject implements RemoteClientCom {
     }
     
     public void showWinnerDialog(String playerName) {
+    	if (moveDialog == null) {
+    		moveDialog = new MoveDialog();
+    	}
     	moveDialog.PaintWinningMoveDialog(playerName);
     }
     
     public void showDrawnDialog() {
+    	if (moveDialog == null) {
+    		moveDialog = new MoveDialog();
+    	}
     	moveDialog.PaintDrawnMoveDialog();
     }
     
     public void showInvalidDialog(String invalid) {
+    	if (moveDialog == null) {
+    		moveDialog = new MoveDialog();
+    	}
     	moveDialog.PaintInvalidMoveDialog(invalid);
     }
     

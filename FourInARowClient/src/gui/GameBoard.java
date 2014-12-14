@@ -9,8 +9,6 @@ public class GameBoard extends JPanel implements ActionListener {
 	private static final long serialVersionUID = 1L;
 	
 	private JPanel playArea = new JPanel(new GridLayout(6, 0, 2, 2));
-    private final Color RED = new Color(255, 0, 0);
-    private final Color BLUE = new Color(0, 0, 255);
     private JPanel[][] panelGrid = new JPanel[6][7];
     private JPanel columnSelect = new JPanel(new GridLayout(1, 0, 2, 0));
     private JButton[] columnButtons = new JButton[7];

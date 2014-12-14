@@ -34,7 +34,6 @@ public class SetupGameDialog extends JDialog {
                 try {
 					serverCom.setPlayerName(playerTextField.getText(), idTag);
 				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
                 dispose();
